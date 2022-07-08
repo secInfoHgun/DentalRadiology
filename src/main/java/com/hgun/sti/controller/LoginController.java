@@ -17,6 +17,11 @@ public class LoginController {
     @Autowired
     public UsuarioRepository usuarioRepository;
 
+    @GetMapping("/")
+    public String rotabarra(){
+        return "redirect:entrar";
+    }
+
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -41,10 +46,14 @@ public class LoginController {
         for (var role : roles) {
             if(role.getName().equals("ADMINISTRADOR")){
                 return "redirect:/administrador/especialidade";
-            }else if(role.getName().equals("ATENDENTE")){
+            }else if(role.getName().equals("DENTISTA")){
                 return "redirect:/atendente";
+            }else if(role.getName().equals("RADIOLOGISTA")){
+                return "redirect:/atendente";
+            }else{
+                return "redirect:/error";
             }
         }
-        return "redirect:/";
+        return "redirect:/error";
     }
 }

@@ -1,4 +1,4 @@
-package com.hgun.sti.models;
+package com.hgun.sti.models.tipos;
 
 import com.hgun.sti.models.abstracts.AbstractEntidade;
 import lombok.AllArgsConstructor;
@@ -12,11 +12,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="pessoas")
-public class Pessoa extends AbstractEntidade {
+@Table(name="tomografia")
+public class Tomografia extends AbstractEntidade {
     private String nome;
-    private String cpf;
-    private Integer idade;
-    private Character sexo;
-    private String preccp;
 }
