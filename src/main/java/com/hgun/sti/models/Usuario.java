@@ -1,6 +1,6 @@
 package com.hgun.sti.models;
 
-import com.hgun.sti.models.abstracts.AbstractPessoa;
+import com.hgun.sti.models.abstracts.AbstractEntidade;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,10 +15,13 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name="usuarios")
-public class Usuario extends AbstractPessoa {
+public class Usuario extends AbstractEntidade {
 
     private String login;
     private String senha;
+
+    @OneToOne
+    private Pessoa pessoa;
 
     @Transient
     private String senhaConfirmada;

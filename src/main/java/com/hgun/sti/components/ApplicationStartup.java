@@ -24,7 +24,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     public void onApplicationEvent(final ApplicationReadyEvent event) {
         var roles = roleRepository.findAll();
 
-        String[] roleLabes = { "ADMINISTRADOR" , "FUNCIONARIO" };
+        String[] roleLabes = { "ADMINISTRADOR" , "DENTISTA" , "RADIOLOGISTA" };
 
         if(roles.isEmpty()){
 
@@ -40,13 +40,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei as roles");
         }
 
-        var usuarioSuporte = usuarioRepository.getUsuarioByLogin("suporte");
+        var odontoadm = usuarioRepository.getUsuarioByLogin("odontoadm");
+        var odontoradio = usuarioRepository.getUsuarioByLogin("odontoradio");
 
-        if(usuarioSuporte == null){
+        if(odontoadm == null){
             var newUsuario = new Usuario();
 
-            newUsuario.setLogin("suporte");
-            newUsuario.setSenha("$2a$12$G.N9JLCHVwMWreV9sIPI.eH4yTQtHw7VjQKyvmgzzWOpoUegXwmfu");
+            newUsuario.setLogin("odontoadm");
+            newUsuario.setSenha("$2a$12$7uVG6t0frbesgmtYIQ.Sf.37xPJduv189D1R2cRNi65pdAuG48Awa");
             newUsuario.setAtivo(true);
 
             newUsuario.setRoles(
@@ -59,8 +60,28 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
             usuarioRepository.save(newUsuario);
 
-            System.out.println("cadastrei o usuario de suporte");
+            System.out.println("cadastrei o usuario de odontoadm");
         }
+        if(odontoradio == null){
+            var newUsuario = new Usuario();
+
+            newUsuario.setLogin("odontoradio");
+            newUsuario.setSenha("$2a$12$7uVG6t0frbesgmtYIQ.Sf.37xPJduv189D1R2cRNi65pdAuG48Awa");
+            newUsuario.setAtivo(true);
+
+            newUsuario.setRoles(
+                    Set.copyOf(
+                            Arrays.asList(
+                                    roleRepository.findByName("RADIOLOGISTA")
+                            )
+                    )
+            );
+
+            usuarioRepository.save(newUsuario);
+
+            System.out.println("cadastrei o usuario de odontoradio");
+        }
+
 
         return;
     }

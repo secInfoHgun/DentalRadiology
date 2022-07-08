@@ -16,9 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("SELECT u FROM Usuario u WHERE u.login = :login")
     public Usuario getUsuarioByLogin(@Param("login") String username);
 
-    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
-    public Usuario getUsuarioByEmail(@Param("email") String email);
-
     @Query(value = "select u.*" +
             "from usuarios u " +
             "left join usuarios_roles ur on u.id = ur.usuario_id " +

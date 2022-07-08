@@ -7,20 +7,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class EnderecoError {
-    private String cep;
-    private String cidade;
-    private String bairro;
-    private String rua;
+public class PessoaError {
+    private String nome;
+    private String cpf;
+    private String idade;
+    private String preccp;
 
     public boolean isEmpty(){
-        if(cep != null && !cep.isEmpty()){
+        if(nome != null && !nome.isEmpty()){
             return false;
-        }else if(cidade != null && !cidade.isEmpty()){
+        }else if(cpf != null && !cpf.isEmpty()){
             return false;
-        } else if(bairro != null && !bairro.isEmpty()){
+        }else if(idade != null && !idade.isEmpty()){
             return false;
-        }else if(rua != null && !rua.isEmpty()){
+        }else if(preccp != null && !preccp.isEmpty()){
             return false;
         }else{
             return true;

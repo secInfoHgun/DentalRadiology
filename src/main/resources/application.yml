@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/basetemplate
+    url: jdbc:postgresql://localhost:5432/dentalradiology
 #   url: jdbc:postgresql://localhost:5432/"NOME DO BANCO"
     username: postgres
     password: P@sswd1941
@@ -12,7 +12,7 @@ spring:
 
 server:
   port: 8080
-# port: "VERIFICAR AS PORTAS NÃO UTILIZADAS E FAZER UTILIZAR UMA SEM ALOCAÇÃO"
+# port: "VERIFICAR AS PORTAS NAO UTILIZADAS E FAZER UTILIZAR UMA SEM ALOCACAO"
   tomcat:
     relaxed-query-chars: '|,{,},[,]'
   servlet:
