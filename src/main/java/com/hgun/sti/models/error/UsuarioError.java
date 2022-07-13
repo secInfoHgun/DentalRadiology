@@ -12,7 +12,11 @@ public class UsuarioError {
     private String login;
     private String senha;
     private String senhaConfirmada;
-    private PessoaError pessoaError;
+    private PessoaError pessoa;
+
+    private String nomeDeGuerra;
+
+    private String postoGraduacao;
 
     public boolean isEmpty(){
         if(login != null && !login.isEmpty()){
@@ -21,7 +25,11 @@ public class UsuarioError {
             return false;
         }else if(senhaConfirmada != null && !senhaConfirmada.isEmpty()){
             return false;
-        }else if(pessoaError.isEmpty()){
+        }else if(nomeDeGuerra != null && !nomeDeGuerra.isEmpty()){
+            return false;
+        }else if(postoGraduacao != null && !postoGraduacao.isEmpty()){
+            return false;
+        }else if(!pessoa.isEmpty()){
             return false;
         }else{
             return true;

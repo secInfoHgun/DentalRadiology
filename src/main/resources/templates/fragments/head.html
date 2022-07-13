@@ -15,20 +15,52 @@
         <link href="/demo/demo.css" rel="stylesheet" />
 
         <style>
-            .swal2-close:focus {
-                box-shadow: none !important;
-            }
-
             a.lista :hover{
-                fill: #51cbce;
-            }
-            .errorInput{
-                border-color: red;
-            }
-            .modal-confirm {
-                width: 525px;
+                fill: #ef8157;
             }
 
+            .modal-confirm .modal-content {
+                padding: 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: none;
+            }
+
+            .modal-confirm .modal-header {
+                background: white;
+                border-bottom: none;
+                position: relative;
+                text-align: center;
+                margin: -20px -20px 0;
+                border-radius: 5px 5px 0 0;
+                padding: 25px;
+            }
+
+            .modal-confirm .close {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                color: #969696;
+                text-shadow: none;
+                opacity: 0.5;
+            }
+
+            .modal-confirm .close:hover {
+                color: #757575;
+            }
+
+            .modal-confirm .icon-box {
+                color: #f27474;
+                display: inline-block;
+                z-index: 9;
+                padding: 15px;
+            }
+
+            .modal-confirm.modal-dialog {
+                margin-top: 60px;
+            }
+
+            /* switch */
             .switch {
                 position: relative;
                 display: inline-block;
@@ -36,14 +68,12 @@
                 height: 24px;
             }
 
-            /* Hide default HTML checkbox */
             .switch input {
                 opacity: 0;
                 width: 0;
                 height: 0;
             }
 
-            /* The slider */
             .slider {
                 position: absolute;
                 cursor: pointer;
@@ -82,13 +112,188 @@
                 transform: translateX(26px);
             }
 
-            /* Rounded sliders */
             .slider.round {
                 border-radius: 34px;
             }
 
             .slider.round:before {
                 border-radius: 50%;
+            }
+
+            .filter-result .job-box {
+                -webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+                box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+                border-radius: 10px;
+                padding: 10px 35px;
+            }
+
+            ul {
+                list-style: none;
+            }
+
+            .list-disk li {
+                list-style: none;
+                margin-bottom: 12px;
+            }
+
+            .list-disk li:last-child {
+                margin-bottom: 0;
+            }
+
+            .job-overview {
+                -webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+                box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
+                border-radius: 10px;
+            }
+
+            @media (min-width: 992px) {
+                .job-overview {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 70px;
+                }
+            }
+
+            .job-overview .job-detail ul {
+                margin-bottom: 28px;
+            }
+
+            .job-overview .job-detail ul li span {
+                opacity: 0.75;
+                font-weight: 600;
+                margin-bottom: 15px;
+            }
+
+            .job-overview .overview-bottom,
+            .job-overview .overview-top {
+                padding: 40px;
+            }
+
+            .job-content ul li {
+                font-weight: 600;
+                opacity: 0.75;
+                border-bottom: 1px solid #ccc;
+                padding: 10px 5px;
+            }
+
+            @media (min-width: 768px) {
+                .job-content ul li {
+                    border-bottom: 0;
+                    padding: 0;
+                }
+            }
+
+            .job-content ul li svg {
+                font-size: 20px;
+                position: relative;
+                margin-bottom: 2px;
+                margin-right: 5px;
+            }
+            .mb-30 {
+                margin-top: 30px;
+            }
+
+            .progress {
+                width: 150px;
+                height: 150px;
+                background: none;
+                position: relative;
+            }
+
+            .progress::after {
+                content: "";
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                border: 6px solid #eee;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .progress>span {
+                width: 50%;
+                height: 100%;
+                overflow: hidden;
+                position: absolute;
+                top: 0;
+                z-index: 1;
+            }
+
+            .progress .progress-left {
+                left: 0;
+            }
+
+            .progress .progress-bar {
+                width: 100%;
+                height: 100%;
+                background: none;
+                border-width: 6px;
+                border-style: solid;
+                position: absolute;
+                top: 0;
+            }
+
+            .progress .progress-left .progress-bar {
+                left: 100%;
+                border-top-right-radius: 80px;
+                border-bottom-right-radius: 80px;
+                border-left: 0;
+                -webkit-transform-origin: center left;
+                transform-origin: center left;
+            }
+
+            .progress .progress-right {
+                right: 0;
+            }
+
+            .progress .progress-right .progress-bar {
+                left: -100%;
+                border-top-left-radius: 80px;
+                border-bottom-left-radius: 80px;
+                border-right: 0;
+                -webkit-transform-origin: center right;
+                transform-origin: center right;
+            }
+
+            .progress .progress-value {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .accordion2 {
+                background-color: white;
+                color: #444;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: 1px solid #dee2e6;
+                border-radius: 4px;
+                text-align: left;
+                outline: none;
+                font-size: 15px;
+                transition: 0.4s;
+                margin-top: 20px;
+            }
+
+            .active2, .accordion2:hover {
+                background-color: #cecece;
+            }
+
+            .accordion2:after {
+                color: #777;
+                font-weight: bold;
+                float: right;
+                margin-left: 5px;
+            }
+
+            .panel2 {
+                padding: 0 18px;
+                background-color: white;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
             }
 
         </style>

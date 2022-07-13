@@ -88,7 +88,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                 var usuario = usuarioRepository.getUsuarioByLogin(authentication.getName());
 
-                Cookie cookie = new Cookie("userID", usuario.getId().toString());
+                Cookie cookie = new Cookie("userId", usuario.getId().toString());
                 response.addCookie(cookie);
 
                 response.sendRedirect("/entrar");

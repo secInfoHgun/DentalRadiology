@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-    <div class="sidebar" data-color="white" data-active-color="danger" th:fragment="menu(indice)">
+    <div class="sidebar" data-color="white" data-active-color="danger" th:fragment="menu(usuario,indice)">
         <div class="logo">
             <a th:href="@{/}" class="simple-text logo-mini">
                 <div class="logo-image-small">
                     <img src="/img/logo.png">
                 </div>
             </a>
-            <a th:href="@{/}" class="simple-text logo-normal">
-                HGuN
-            </a>
+            <a  class="simple-text logo-normal" th:text="${usuario.login}"></a>
         </div>
         <div class="sidebar-wrapper" style="overflow-x: hidden;">
             <ul class="nav">
-
-<!--                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 1}, '/administrador', 'nc-icon nc-bank', 'Dashboard')"></li>-->
-                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 2}, '/administrador/especialidade', 'nc-icon nc-bullet-list-67', 'Especialidades')"></li>
-<!--                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 3}, '/administrador/funcionarios', 'nc-icon nc-single-02', 'Funcionarios')"></li>-->
-                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 4}, '/administrador/chat', 'nc-icon nc-chat-33', 'Chats')"></li>
-
+                <li sec:authorize="hasAnyAuthority('ADMINISTRADOR')" th:replace="fragments/fragmentMenu/li :: li(${indice == 1}, '/usuario', 'nc-icon nc-badge', 'Dentistas')"></li>
             </ul>
 
             <ul class="nav fixed-bottom" style="margin-bottom: 20px; width: inherit;">

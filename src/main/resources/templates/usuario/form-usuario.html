@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:replace="fragments/head :: head('Usuários')"></div>
+
+    <body style="background-color: #F8F9FAFF">
+        <div class="wrapper ">
+            <div th:replace="fragments/fragmentMenu/menu :: menu(${usuarioLogado},1)"></div>
+
+            <div class="main-panel" style="background-color: #F8F9FAFF">
+                <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+                    <div class="container-fluid">
+                        <div class="navbar-wrapper">
+                            <p class="navbar-brand">Dentistas</p>
+                        </div>
+                        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="content">
+                    <main class="container" style="margin-top: 40px">
+                        <div class="card card-user" style="margin-top: 40px">
+                            <div class="card-body" style="padding: 40px">
+                                <form method="post" th:action="@{/usuario/salvar}" th:object="${usuarioRegister}">
+                                    <input type="hidden" class="form-control" th:field="*{id}">
+
+                                    <div class="row">
+                                        <div class="col-md-12 pl-1">
+                                            <p style="color: #2a2b2d">Dados pessoais</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Nome completo <b style="color: red">*</b></label>
+                                                <input type="text" th:class="${ erros.pessoa != null && erros.pessoa.nome != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{pessoa.nome}">
+                                                <div th:if="${erros.pessoa != null}">
+                                                    <label style="color: red" th:if="${erros.pessoa.nome != null}" th:text="${erros.pessoa.nome}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">CPF <b style="color: red">*</b></label>
+                                                <input type="text" th:class="${erros.pessoa != null && erros.pessoa.cpf != null ? 'form-control is-invalid' : 'form-control'}" data-mask="000.000.000-00" required th:field="*{pessoa.cpf}">
+                                                <div th:if="${erros.pessoa != null}">
+                                                    <label style="color: red" th:if="${erros.pessoa.cpf != null}" th:text="${erros.pessoa.cpf}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">PRECCP <b style="color: red">*</b></label>
+                                                <input th:class="${ erros.pessoa != null && erros.pessoa.preccp != null ? 'form-control is-invalid' : 'form-control'}" type="text" required th:field="*{pessoa.preccp}">
+                                                <div th:if="${erros.pessoa != null}">
+                                                    <label style="color: red" th:if="${erros.pessoa.preccp != null}" th:text="${erros.pessoa.preccp}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Idade <b style="color: red">*</b></label>
+                                                <input th:class="${ erros.pessoa != null && erros.pessoa.idade != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{pessoa.idade}">
+                                                <div th:if="${erros.pessoa != null}">
+                                                    <label style="color: red" th:if="${erros.pessoa.idade != null}" th:text="${erros.pessoa.idade}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Sexo <b style="color: red">*</b></label>
+                                                <select class="form-control" required th:field="*{pessoa.sexo}">
+                                                    <option th:value="N">Não informado</option>
+                                                    <option th:value="M">Masculino</option>
+                                                    <option th:value="F">Feminino</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Nome de guerra <b style="color: red">*</b></label>
+                                                <input type="text" th:class="${ erros.nomeDeGuerra != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{nomeDeGuerra}">
+                                                <label style="color: red" th:if="${erros.nomeDeGuerra != null}" th:text="${erros.nomeDeGuerra}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Nome de guerra <b style="color: red">*</b></label>
+                                                <select th:class="${ erros.postoGraduacao != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{postoGraduacao}">
+                                                    <option th:value="N">Não informado</option>
+                                                    <option th:value="M">Masculino</option>
+                                                    <option th:value="F">Feminino</option>
+                                                </select>
+                                                <label style="color: red" th:if="${erros.postoGraduacao != null}" th:text="${erros.postoGraduacao}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-12 pl-1">
+                                            <p style="color: #2a2b2d">Dados do sistema</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Login <b style="color: red">*</b></label>
+                                                <input type="text" th:class="${ erros.login != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{login}">
+                                                <label style="color: red" th:if="${erros.login != null}" th:text="${erros.login}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Senha <b style="color: red">*</b></label>
+                                                <input type="password" id="senha" th:class="${ erros.senha != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{senha}">
+                                                <label id="errorSenha" style="display: none"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Confirmação da senha <b style="color: red">*</b></label>
+                                                <input onKeyPress="verifica()" id="confirmaSenha" type="password" th:class="${ erros.senhaConfirmada != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{senhaConfirmada}">
+                                                <label id="errorConfirmaSenha" style="display: none"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="ml-auto mr-auto">
+                                            <button type="submit" class="btn btn-success mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Salvar</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/imports :: imports"></div>
+
+        <script th:inline="javascript" type="text/javascript">
+            function validaSenhas(){
+                let senha = document.getElementById("senha");
+                let confirmaSenha = document.getElementById("confirmaSenha");
+                let errorConfirmaSenha = document.getElementById("errorConfirmaSenha");
+                let errorSenha = document.getElementById("errorSenha");
+
+
+                if(confirmaSenha.value != ""){
+                    if(senha.value === confirmaSenha.value){
+                        confirmaSenha.classList.remove("is-invalid")
+                        confirmaSenha.classList.add("is-valid");
+                        errorConfirmaSenha.style.display = "none"
+                    }else{
+                        confirmaSenha.classList.remove("is-valid")
+                        confirmaSenha.classList.add("is-invalid")
+                        errorConfirmaSenha.style.color = "#f00"
+                        errorConfirmaSenha.style.display = "inline"
+                        errorConfirmaSenha.textContent = "As senhas devem ser iguais!"
+                    }
+                }
+
+                if(senha.value != ""){
+                    if(senha.value.length < 6) {
+                        senha.classList.remove("is-valid")
+                        senha.classList.add("is-invalid")
+                        errorSenha.style.color = "#f00"
+                        errorSenha.style.display = "inline"
+                        errorSenha.textContent = "A senha deve conter no minímo 6 caracteres!"
+                    } else {
+                            senha.classList.remove("is-invalid")
+                            senha.classList.add("is-valid");
+                            errorSenha.style.display = "none"
+                    }
+                }
+            }
+
+            setInterval(validaSenhas, 50);
+        </script>
+    </body>
+
+</html>

@@ -20,11 +20,17 @@ public class Usuario extends AbstractEntidade {
     private String login;
     private String senha;
 
-    @OneToOne
+    private String postoGraduacao;
+    private String nomeDeGuerra;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Pessoa pessoa;
 
     @Transient
     private String senhaConfirmada;
+
+    @Transient
+    private String inputFilter;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

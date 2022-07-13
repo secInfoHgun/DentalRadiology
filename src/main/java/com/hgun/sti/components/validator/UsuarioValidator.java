@@ -10,7 +10,7 @@ public class UsuarioValidator {
 
         var usuarioError = new UsuarioError();
 
-        usuarioError.setPessoaError(PessoaValidator.validarPessoa(usuario.getPessoa()));
+        usuarioError.setPessoa(PessoaValidator.validarPessoa(usuario.getPessoa()));
 
         if (usuario.getLogin() == null || usuario.getLogin().isEmpty()) {
             usuarioError.setLogin("O login não pode ser vazio!");
@@ -33,6 +33,16 @@ public class UsuarioValidator {
             usuarioError.setSenhaConfirmada("A senha não pode ser vazia!");
         }else if(!usuario.getSenhaConfirmada().equals(usuario.getSenha())){
             usuarioError.setSenhaConfirmada("As senhas devem ser iguais!");
+        }
+
+        if (usuario.getNomeDeGuerra() == null || usuario.getNomeDeGuerra().isEmpty()) {
+            usuarioError.setNomeDeGuerra("O nome de guerra não pode ser vazio!");
+        }else if(usuario.getNomeDeGuerra().length() < 4){
+            usuarioError.setNomeDeGuerra("O nome de guerra está muito curto! (min: 4 caracteres)");
+        }
+
+        if (usuario.getPostoGraduacao() == null || usuario.getPostoGraduacao().isEmpty()) {
+            usuarioError.setSenha("O posto / graduação não pode ser vazio!");
         }
 
         return usuarioError;

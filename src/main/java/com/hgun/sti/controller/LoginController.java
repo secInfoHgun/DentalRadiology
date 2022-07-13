@@ -45,11 +45,11 @@ public class LoginController {
 
         for (var role : roles) {
             if(role.getName().equals("ADMINISTRADOR")){
-                return "redirect:/administrador/especialidade";
+                return "redirect:/usuario";
             }else if(role.getName().equals("DENTISTA")){
-                return "redirect:/atendente";
+                return "redirect:/exame/form";
             }else if(role.getName().equals("RADIOLOGISTA")){
-                return "redirect:/atendente";
+                return "redirect:/exame";
             }else{
                 return "redirect:/error";
             }
