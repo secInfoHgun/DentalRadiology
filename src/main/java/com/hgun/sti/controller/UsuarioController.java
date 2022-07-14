@@ -17,9 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Set;
 
 @Controller
-@RequestMapping("/usuario")
+@RequestMapping("/dentista")
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -57,7 +59,7 @@ public class UsuarioController {
 
         redirectAttributes.addFlashAttribute("filterUsuario", filterUsuario);
 
-        return "redirect:/usuario";
+        return "redirect:/dentista";
     }
 
     @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
@@ -97,14 +99,22 @@ public class UsuarioController {
         if(!erros.isEmpty()){
             redirectAttributes.addFlashAttribute("usuarioRegister", usuario);
             redirectAttributes.addFlashAttribute("erros", erros);
-            return "redirect:/usuario/form";
+            return "redirect:/dentista/form";
         }
 
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 
+        usuario.setRoles(
+                Set.copyOf(
+                        Arrays.asList(
+                                roleRepository.findByName("DENTISTA")
+                        )
+                )
+        );
+
         usuarioRepository.save(usuario);
 
-        return "redirect:/usuario";
+        return "redirect:/dentista";
 
     }
 
@@ -120,7 +130,7 @@ public class UsuarioController {
         redirectAttributes.addFlashAttribute("usuarioRegister", usuario);
         redirectAttributes.addFlashAttribute("erros", new UsuarioError());
 
-        return "redirect:/usuario/form";
+        return "redirect:/dentista/form";
 
     }
 
@@ -132,6 +142,6 @@ public class UsuarioController {
         usuario.setAtivo(false);
         usuarioRepository.save(usuario);
 
-        return "redirect:/usuario";
+        return "redirect:/dentista";
     }
 }

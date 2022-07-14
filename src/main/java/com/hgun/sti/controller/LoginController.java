@@ -37,7 +37,7 @@ public class LoginController {
     public String entra(HttpServletRequest request){
         var usuario = this.usuarioRepository.findById(
                 Long.parseLong(
-                        getCookie(request, "userID").getValue()
+                        getCookie(request, "userId").getValue()
                 )
         ).get();
 
@@ -45,7 +45,7 @@ public class LoginController {
 
         for (var role : roles) {
             if(role.getName().equals("ADMINISTRADOR")){
-                return "redirect:/usuario";
+                return "redirect:/dentista";
             }else if(role.getName().equals("DENTISTA")){
                 return "redirect:/exame/form";
             }else if(role.getName().equals("RADIOLOGISTA")){

@@ -18,7 +18,7 @@ public class UsuarioValidator {
             usuarioError.setLogin("O login do usuário está muito curto! (min: 4 caracteres)");
         }else{
             for (Usuario bdUser : usuariosAtivos) {
-                if(bdUser.getLogin().equals(usuario.getLogin())){
+                if(bdUser.getLogin().equals(usuario.getLogin()) && bdUser.getId() != usuario.getId()){
                     usuarioError.setLogin("O login já existente!");
                     break;
                 }
