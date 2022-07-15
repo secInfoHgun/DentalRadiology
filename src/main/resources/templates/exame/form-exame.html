@@ -135,177 +135,22 @@
                     </div>
                 </div>
 
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Diagnóstico do paciente</label>-->
-<!--                            <input th:style="${ erros.diagnostico != null ? 'border-color: red' : ''}" class="form-control" th:field="*{diagnostico}">-->
-<!--                            <label style="color: red" th:if="${erros.diagnostico != null}" th:text="${erros.diagnostico}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-3 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Data da internação / atendimento</label>-->
-<!--                            <input type="text" th:class="${ erros.dataDaInternacao != null ? 'form-control errorInput' : 'form-control'}" data-mask="00/00/0000" th:field="*{dataDaInternacao}">-->
-<!--                            <label style="color: red" th:if="${erros.dataDaInternacao != null}" th:text="${erros.dataDaInternacao}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-3 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Hora da internação / atendimento</label>-->
-<!--                            <input type="text" th:class="${ erros.horaDaInternacao != null ? 'form-control errorInput' : 'form-control'}" data-mask="00:00" th:field="*{horaDaInternacao}">-->
-<!--                            <label style="color: red" th:if="${erros.horaDaInternacao != null}" th:text="${erros.horaDaInternacao}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="row">
+                    <div class="col-md-3 px-1" th:each="inter : ${listInterproximais}">
+                        <label style="color: #2a2b2d" th:if="${inter.id == 1}">Interproximal</label>
+                        <div th:style="${inter.id == 1 ? 'margin-top: 10px; margin-left: 60px' : 'margin-top: 35px; margin-left: 60px'}">
+                            <input class="form-check-input" type="checkbox" th:field="*{interproximais}" th:value="${inter.id}" style="width: 20px; height: 20px">
+                            <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d" th:text="${inter.nome}"></label>
+                        </div>
+                    </div>
 
-<!--                <div class="row" style="margin-top: 20px">-->
-<!--                    <div class="col-md-12 pl-1">-->
-<!--                        <p style="color: #2a2b2d">Dados da Ocorrência / Evento Adverso</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-3 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Data do incidente / evento adverso <b style="color: red">*</b></label>-->
-<!--                            <input type="text" th:class="${ erros.dataDaOcorrencia != null ? 'form-control errorInput' : 'form-control'}" data-mask="00/00/0000" required th:field="*{dataDaOcorrencia}">-->
-<!--                            <label style="color: red" th:if="${erros.dataDaOcorrencia != null}" th:text="${erros.dataDaOcorrencia}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-3 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Hora do incidente / evento adverso <b style="color: red">*</b></label>-->
-<!--                            <input type="text" th:class="${ erros.horaDaOcorrencia != null ? 'form-control errorInput' : 'form-control'}" data-mask="00:00" required th:field="*{horaDaOcorrencia}">-->
-<!--                            <label style="color: red" th:if="${erros.horaDaOcorrencia != null}" th:text="${erros.horaDaOcorrencia}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-6 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Setor da ocorrência <b style="color: red">*</b></label>-->
-<!--                            <select th:class="${ erros.tipoSetor != null ? 'form-control errorInput' : 'form-control'}" th:field="*{tipoSetor.id}" required>-->
-<!--                                <option th:value="null"></option>-->
-<!--                                <option th:value="${tipo.id}" th:each="tipo : ${listaTipoSetor}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>-->
-<!--                            </select>-->
-<!--                            <label style="color: red" th:if="${erros.tipoSetor != null}" th:text="${erros.tipoSetor}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Dados que descrevem a ocorrencia &ndash;&gt;-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12 px-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Resumo da ocorrência / descrição do incidente <b style="color: red">*</b></label>-->
-<!--                            <textarea th:style="${ erros.resumo != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{resumo}"></textarea>-->
-<!--                            <label style="color: red" th:if="${erros.resumo != null}" th:text="${erros.resumo}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Como foi identificado o incidente / evento adverso? <b style="color: red">*</b></label>-->
-<!--                            <select th:class="${ erros.tipoIdentificacao != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoIdentificacao.id}">-->
-<!--                                <option th:value="null"></option>-->
-<!--                                <option th:value="${tipo.id}" th:each="tipo : ${listaTipoIdentificacao}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>-->
-<!--                            </select>-->
-<!--                            <label style="color: red" th:if="${erros.tipoIdentificacao != null}" th:text="${erros.tipoIdentificacao}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-6 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Quem identificou o incidente / evento adverso? <b style="color: red">*</b></label>-->
-<!--                            <select th:class="${ erros.tipoIdentificador != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoIdentificador.id}">-->
-<!--                                <option th:value="null"></option>-->
-<!--                                <option th:value="${tipo.id}" th:each="tipo : ${listaTipoIdentificador}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>-->
-<!--                            </select>-->
-<!--                            <label style="color: red" th:if="${erros.tipoIdentificador != null}" th:text="${erros.tipoIdentificador}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-5 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Tipo de ocorrência <b style="color: red">*</b></label>-->
-<!--                            <select th:class="${ erros.tipoOcorrencia != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoOcorrencia.id}">-->
-<!--                                <option th:value="null"></option>-->
-<!--                                <option th:value="${tipo.id}" th:each="tipo : ${listaTipoOcorrencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>-->
-<!--                            </select>-->
-<!--                            <label style="color: red" th:if="${erros.tipoOcorrencia != null}" th:text="${erros.tipoOcorrencia}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-7 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Em que fase da assistência ocorreu? </label>-->
-<!--                            <select th:class="${ erros.tipoFaseAssistencia != null ? 'form-control errorInput' : 'form-control'}" th:field="*{tipoFaseAssistencia.id}">-->
-<!--                                <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFaseAssistencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>-->
-<!--                            </select>-->
-<!--                            <label style="color: red" th:if="${erros.tipoFaseAssistencia != null}" th:text="${erros.tipoFaseAssistencia}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-7 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Tipo de incidente <small>(com/sem Dano)</small> <b style="color: red">*</b></label>-->
-<!--                            <select th:class="${ erros.tipoIncidencia != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoIncidencia.id}">-->
-<!--                                <option th:value="null"></option>-->
-<!--                                <option th:value="${tipo.id}" th:each="tipo : ${listaTipoIncidencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>-->
-<!--                            </select>-->
-<!--                            <label style="color: red" th:if="${erros.tipoIncidencia != null}" th:text="${erros.tipoIncidencia}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-5 pl-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Característica <small>(Grau do Dano)</small> <b style="color: red">*</b></label>-->
-<!--                            <select th:class="${ erros.tipoDano != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoDano.id}">-->
-<!--                                <option th:value="null"></option>-->
-<!--                                <option th:value="${tipo.id}" th:each="tipo : ${listaTipoDano}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>-->
-<!--                            </select>-->
-<!--                            <label style="color: red" th:if="${erros.tipoDano != null}" th:text="${erros.tipoDano}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12 px-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Quais medidas foram tomadas no momento do incidente / evento adverso? <b style="color: red">*</b></label>-->
-<!--                            <textarea th:style="${ erros.descricao != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{descricao}"></textarea>-->
-<!--                            <label style="color: red" th:if="${erros.descricao != null}" th:text="${erros.descricao}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 px-1">-->
-<!--                        <div class="form-group">-->
-<!--                            <label style="color: #2a2b2d">Se houver fator contribuinte, qual foi?</label>-->
-<!--                            <input type="text" th:class="${ erros.fatorContribuinte != null ? 'form-control errorInput' : 'form-control'}" th:field="*{fatorContribuinte}">-->
-<!--                            <label style="color: red" th:if="${erros.fatorContribuinte != null}" th:text="${erros.fatorContribuinte}"></label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="col-md-3 px-1">-->
-<!--                        <div style="margin-top: 30px; margin-left: 60px">-->
-<!--                            <input class="form-check-input" type="checkbox" th:field="*{pacienteFoiInternado}" th:checked="${pacienteFoiInternado}" style="width: 20px; height: 20px">-->
-<!--                            <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d">-->
-<!--                                O ocorrido levou a internação-->
-<!--                            </label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-3 px-1">-->
-<!--                        <div style="margin-top: 30px; margin-left: 60px">-->
-<!--                            <input class="form-check-input" type="checkbox" th:field="*{pacienteFaleceu}" th:checked="${pacienteFaleceu}" style="width: 20px; height: 20px">-->
-<!--                            <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d">-->
-<!--                                O ocorrido levou a óbito-->
-<!--                            </label>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                    <div class="col-md-6 px-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">Data</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
 
 <!--                <div class="row">-->
 <!--                    <div class="ml-auto mr-auto">-->

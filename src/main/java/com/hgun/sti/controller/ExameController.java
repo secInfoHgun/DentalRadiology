@@ -4,6 +4,7 @@ import com.hgun.sti.components.GetCookie;
 import com.hgun.sti.models.Exame;
 import com.hgun.sti.models.Usuario;
 import com.hgun.sti.repository.UsuarioRepository;
+import com.hgun.sti.repository.tipos.InterproximalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class ExameController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private InterproximalRepository interproximalRepository;
 
 //    LADO DO RADIOLOGISTA
 
@@ -52,8 +56,8 @@ public class ExameController {
         var exame = new Exame();
         exame.setDentista(new GetCookie().getCookieUsuario(usuarioRepository,request));
 
-
         model.addAttribute("exame", exame);
+        model.addAttribute("listInterproximais", interproximalRepository.findAll());
 
         return "exame/form-exame";
     }
