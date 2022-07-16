@@ -34,9 +34,9 @@
 </header>
 
 <main class="container">
-    <div class="card card-user" style="margin-top: 40px">
+    <div class="card card-user" style="margin-top: 40px; margin-bottom: 20px">
         <div class="card-body" style="padding: 40px">
-            <form method="post" th:action="@{exame/salvar}" th:object="${exame}">
+            <form method="post" th:action="@{/exame/salvar}" th:object="${exame}">
 
                 <div class="row">
                     <div class="col-md-12 pl-1">
@@ -136,27 +136,814 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 px-1" th:each="inter : ${listInterproximais}">
+                    <div class="col-md-3 pl-1" th:each="inter : ${listInterproximais}">
                         <label style="color: #2a2b2d" th:if="${inter.id == 1}">Interproximal</label>
-                        <div th:style="${inter.id == 1 ? 'margin-top: 10px; margin-left: 60px' : 'margin-top: 35px; margin-left: 60px'}">
+                        <div th:style="${inter.id == 1 ? 'margin-top: 10px; margin-left: 60px' : 'margin-top: 37px; margin-left: 60px'}">
                             <input class="form-check-input" type="checkbox" th:field="*{interproximais}" th:value="${inter.id}" style="width: 20px; height: 20px">
                             <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d" th:text="${inter.nome}"></label>
                         </div>
                     </div>
 
-                    <div class="col-md-6 px-1">
+                    <div class="col-md-6 pl-1">
                         <div class="form-group">
                             <label style="color: #2a2b2d">Data</label>
                             <input type="text" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">Periapical</label>
+                            <select id="inputPeriapical" class="form-control" th:field="*{periapical.id}">
+                                <option th:value="null"></option>
+                                <option th:value="${peri.id}" th:each="peri : ${listPeriapicais}" th:text="${peri.nome}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-<!--                <div class="row">-->
-<!--                    <div class="ml-auto mr-auto">-->
-<!--                        <button type="submit" class="btn btn-primary mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Enviar</button>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div>
+                    <div class="row">
+                        <div class="col-md-12 pl-1">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${8}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">18</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${7}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">17</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${6}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">16</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${5}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">15</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${4}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">14</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${3}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">13</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${2}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">12</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${1}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">11</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${9}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">21</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${10}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">22</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${11}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">23</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${12}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">24</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${13}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">25</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${14}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">26</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${15}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">27</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${16}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">28</label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="color: #2a2b2d">D</label>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${37}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">55</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${36}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">54</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${35}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">53</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${34}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">52</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${33}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">51</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${38}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">61</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${39}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">62</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${40}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">63</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${41}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">64</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${42}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">65</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">E</label>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pl-1">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="color: #2a2b2d">D</label>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${52}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">85</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${51}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">84</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${50}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">83</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${49}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">82</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${48}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">81</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${43}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">71</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${44}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">72</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${45}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">73</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${46}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">74</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${47}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">75</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">E</label>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${32}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">48</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${31}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">47</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${30}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">46</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${29}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">45</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${28}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">44</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${27}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">43</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${26}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">42</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${25}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">41</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${17}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">31</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${18}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">32</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${19}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">33</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${20}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">34</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${21}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">35</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${22}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">36</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${23}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">37</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesPeriapical}" th:value="${24}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">38</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">Tomografia</label>
+                            <select id="inputTomografia" class="form-control" required th:field="*{tomografia.id}">
+                                <option th:value="null"></option>
+                                <option th:value="${tomo.id}" th:each="tomo : ${listTomografias}" th:text="${tomo.nome}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="col-md-12 pl-1">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${8}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">18</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${7}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">17</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${6}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">16</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${5}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">15</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${4}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">14</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${3}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">13</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${2}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">12</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${1}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">11</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${9}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">21</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${10}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">22</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${11}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">23</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${12}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">24</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${13}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">25</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${14}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">26</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${15}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">27</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${16}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">28</label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="color: #2a2b2d">D</label>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${37}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">55</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${36}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">54</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${35}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">53</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${34}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">52</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${33}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">51</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${38}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">61</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${39}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">62</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${40}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">63</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${41}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">64</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${42}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">65</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">E</label>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 pl-1">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="color: #2a2b2d">D</label>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${52}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">85</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${51}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">84</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${50}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">83</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${49}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">82</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${48}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">81</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${43}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">71</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${44}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">72</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${45}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">73</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${46}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">74</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${47}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">75</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">E</label>
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                    <td class="text-center">
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${32}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">48</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${31}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">47</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${30}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">46</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${29}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">45</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${28}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">44</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${27}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">43</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${26}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">42</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${25}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">41</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${17}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">31</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${18}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">32</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${19}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">33</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${20}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">34</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${21}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">35</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${22}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">36</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${23}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">37</label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div style="margin-left: 20px">
+                                            <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" th:field="*{dentesTomografia}" th:value="${24}">
+                                            <label class="form-check-label" style="margin-left: 10px; margin-top: 6px; color: #2a2b2d">38</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">Observações</label>
+                            <textarea class="form-control" th:field="*{observacoes}"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="ml-auto mr-auto">
+                        <button type="submit" class="btn btn-success mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Enviar</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -188,6 +975,8 @@
     $(document).ready(function() {
         $('#myModal').modal('show');
     })
+
+
 </script>
 </body>
 </html>

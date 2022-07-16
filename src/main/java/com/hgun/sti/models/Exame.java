@@ -23,10 +23,6 @@ public class Exame extends AbstractEntidade {
 
     private String observacoes;
 
-    private String descLesao;
-
-    private String descOutros;
-
     private Date dataSolicitacao;
 
     @Transient

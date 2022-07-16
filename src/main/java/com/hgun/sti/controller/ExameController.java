@@ -2,16 +2,20 @@ package com.hgun.sti.controller;
 
 import com.hgun.sti.components.GetCookie;
 import com.hgun.sti.models.Exame;
-import com.hgun.sti.models.Usuario;
+import com.hgun.sti.repository.ExameRepository;
 import com.hgun.sti.repository.UsuarioRepository;
 import com.hgun.sti.repository.tipos.InterproximalRepository;
+import com.hgun.sti.repository.tipos.PeriapicalRepository;
+import com.hgun.sti.repository.tipos.TomografiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -22,7 +26,16 @@ public class ExameController {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private ExameRepository exameRepository;
+
+    @Autowired
     private InterproximalRepository interproximalRepository;
+
+    @Autowired
+    private PeriapicalRepository periapicalRepository;
+
+    @Autowired
+    private TomografiaRepository tomografiaRepository;
 
 //    LADO DO RADIOLOGISTA
 
@@ -44,9 +57,6 @@ public class ExameController {
         return null;
     }
 
-
-
-
 //    LADO DO DENTISTA
 
     @PreAuthorize("hasAnyAuthority('DENTISTA')")
@@ -58,14 +68,20 @@ public class ExameController {
 
         model.addAttribute("exame", exame);
         model.addAttribute("listInterproximais", interproximalRepository.findAll());
+        model.addAttribute("listPeriapicais", periapicalRepository.findAll());
+        model.addAttribute("listTomografias", tomografiaRepository.findAll());
 
         return "exame/form-exame";
     }
 
     @PreAuthorize("hasAnyAuthority('DENTISTA')")
-    @GetMapping("/salvar")
-    public String salvarExames(@ModelAttribute Exame exame, Model model, HttpServletRequest request){
+    @PostMapping("/salvar")
+    public String salvarExames(@ModelAttribute Exame exame, RedirectAttributes redirectAttributes){
 
+        exame.setDataSolicitacao(new Date());
+        exameRepository.save(exame);
+
+        redirectAttributes.addFlashAttribute("cadastrou", true);
 
         return "redirect:/exame/form";
     }
