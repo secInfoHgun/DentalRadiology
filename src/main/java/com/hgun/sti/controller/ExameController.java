@@ -43,6 +43,12 @@ public class ExameController {
     @GetMapping
     public String pageListExames(Model model, HttpServletRequest request){
 
+        model.addAttribute("usuarioLogado", new GetCookie().getCookieUsuario(usuarioRepository,request));
+
+        if(model.getAttribute("exames") == null){
+            model.addAttribute("exames", exameRepository.findAll());
+        }
+
         return "exame/list-exame";
     }
 
@@ -65,6 +71,7 @@ public class ExameController {
 
         var exame = new Exame();
         exame.setDentista(new GetCookie().getCookieUsuario(usuarioRepository,request));
+        exame.setDataSolicitacao(new Date());
 
         model.addAttribute("exame", exame);
         model.addAttribute("listInterproximais", interproximalRepository.findAll());

@@ -40,7 +40,7 @@
 
                 <div class="row">
                     <div class="col-md-12 pl-1">
-                        <p style="color: #2a2b2d">Dados do Dentista</p>
+                        <h6 style="color: #2a2b2d">Dados do Dentista</h6>
                     </div>
                 </div>
 
@@ -83,9 +83,9 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="margin-top: 20px">
                     <div class="col-md-12 pl-1">
-                        <p style="color: #2a2b2d">Dados do Paciente</p>
+                        <h6 style="color: #2a2b2d">Dados do Paciente</h6>
                     </div>
                 </div>
 
@@ -129,34 +129,34 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="margin-top: 20px">
                     <div class="col-md-12 pl-1">
-                        <p style="color: #2a2b2d">Dados do Exame</p>
+                        <h6 style="color: #2a2b2d">Dados do Exame</h6>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 pl-1" th:each="inter : ${listInterproximais}">
-                        <label style="color: #2a2b2d" th:if="${inter.id == 1}">Interproximal</label>
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">Data</label>
+                            <input type="text" th:value="${exame.getDataSolicitacaoFormatter()}" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 pl-1" th:each="inter : ${listInterproximais}">
+                        <label style="color: #2a2b2d" th:if="${inter.id == 1}"><strong>Interproximal</strong></label>
                         <div th:style="${inter.id == 1 ? 'margin-top: 10px; margin-left: 60px' : 'margin-top: 37px; margin-left: 60px'}">
                             <input class="form-check-input" type="checkbox" th:field="*{interproximais}" th:value="${inter.id}" style="width: 20px; height: 20px">
                             <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d" th:text="${inter.nome}"></label>
                         </div>
                     </div>
-
-                    <div class="col-md-6 pl-1">
-                        <div class="form-group">
-                            <label style="color: #2a2b2d">Data</label>
-                            <input type="text" class="form-control" disabled>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 pl-1">
                         <div class="form-group">
-                            <label style="color: #2a2b2d">Periapical</label>
+                            <label style="color: #2a2b2d"><strong>Periapical</strong></label>
                             <select id="inputPeriapical" class="form-control" th:field="*{periapical.id}">
-                                <option th:value="null"></option>
                                 <option th:value="${peri.id}" th:each="peri : ${listPeriapicais}" th:text="${peri.nome}"></option>
                             </select>
                         </div>
@@ -543,9 +543,8 @@
                 <div class="row">
                     <div class="col-md-12 pl-1">
                         <div class="form-group">
-                            <label style="color: #2a2b2d">Tomografia</label>
-                            <select id="inputTomografia" class="form-control" required th:field="*{tomografia.id}">
-                                <option th:value="null"></option>
+                            <label style="color: #2a2b2d"><strong>Tomografia</strong></label>
+                            <select id="inputTomografia" class="form-control" th:field="*{tomografia.id}">
                                 <option th:value="${tomo.id}" th:each="tomo : ${listTomografias}" th:text="${tomo.nome}"></option>
                             </select>
                         </div>
@@ -949,34 +948,28 @@
     </div>
 </main>
 
-<div th:if="${cadastrou != null}" id="myModal" class="modal fade">
-    <div class="modal-dialog modal-confirm">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <div class="icon-box">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="95" height="95" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
-                    </svg>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body text-center">
-                <h4>Solicitação realizada com sucesso!</h4>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/imports :: imports"></div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#myModal').modal('show');
-    })
+    var cadastrou = [[${cadastrou}]];
+    if(cadastrou){
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+            title: 'Solicitação realizada com sucesso!',
+            timer: 2000,
+            showConfirmButton: false,
+            didOpen: () => {
+                timerInterval = setInterval(() => {
+                }, 2000)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+        })
 
-
+    }
 </script>
 </body>
 </html>

@@ -119,7 +119,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listPeriapical.isEmpty()){
 
-            String[] nomes = { "Exame preriapical completo" , "Exame preriapical completo, com interproximais" , "Dentes assinalados"};
+            String[] nomes = { " " , "Exame preriapical completo" , "Exame preriapical completo, com interproximais" , "Dentes assinalados"};
 
             for (String i: nomes) {
                 var periapical =  new Periapical();
@@ -132,7 +132,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listTomografia.isEmpty()){
 
-            String[] nomes = { "Total" , "Maxila" , "Mandíbula" , "Região" , "Endodontia / Fratura / Perfuração Radicular / Canais Acessórios" , "Lesão" , "Outros"};
+            String[] nomes = { " " , "Total" , "Maxila" , "Mandíbula" , "Região" , "Endodontia / Fratura / Perfuração Radicular / Canais Acessórios" , "Lesão" , "Outros"};
 
             for (String i: nomes) {
                 var tomografia =  new Tomografia();

@@ -13,6 +13,7 @@
         <div class="sidebar-wrapper" style="overflow-x: hidden;">
             <ul class="nav">
                 <li sec:authorize="hasAnyAuthority('ADMINISTRADOR')" th:replace="fragments/fragmentMenu/li :: li(${indice == 1}, '/dentista', 'nc-icon nc-badge', 'Dentistas')"></li>
+                <li sec:authorize="hasAnyAuthority('RADIOLOGISTA')" th:replace="fragments/fragmentMenu/li :: li(${indice == 2}, '/exame', 'nc-icon  nc-tile-56', 'Exames')"></li>
             </ul>
 
             <ul class="nav fixed-bottom" style="margin-bottom: 20px; width: inherit;">

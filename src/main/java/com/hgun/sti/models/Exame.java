@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,10 +27,7 @@ public class Exame extends AbstractEntidade {
 
     private Date dataSolicitacao;
 
-    @Transient
-    private String dataSolicitacaoForm;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Pessoa paciente;
 
     @OneToOne
@@ -63,4 +62,8 @@ public class Exame extends AbstractEntidade {
             inverseJoinColumns = @JoinColumn(name = "dente_id")
     )
     private Set<Dente> dentesTomografia = new HashSet<>();
+
+    public String getDataSolicitacaoFormatter(){
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:YY").format(this.dataSolicitacao);
+    }
 }
