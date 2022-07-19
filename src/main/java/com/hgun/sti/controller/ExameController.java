@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +42,6 @@ public class ExameController {
     private TomografiaRepository tomografiaRepository;
 
 //    LADO DO RADIOLOGISTA
-
     @PreAuthorize("hasAnyAuthority('RADIOLOGISTA')")
     @GetMapping
     public String pageListExames(Model model, HttpServletRequest request){
@@ -46,25 +49,79 @@ public class ExameController {
         model.addAttribute("usuarioLogado", new GetCookie().getCookieUsuario(usuarioRepository,request));
 
         if(model.getAttribute("exames") == null){
-            model.addAttribute("exames", exameRepository.findAll());
+            model.addAttribute("exames", exameRepository.findAllAtivo());
+        }
+
+        if(model.getAttribute("filtro") == null){
+            model.addAttribute("filtro", new Exame());
         }
 
         return "exame/list-exame";
     }
 
     @PreAuthorize("hasAnyAuthority('RADIOLOGISTA')")
+    @PostMapping
+    public String filterPageListExames(@ModelAttribute Exame filter, RedirectAttributes redirectAttributes) throws ParseException {
+        Date dataInicio = null;
+        Date dataFim;
+
+        if(!filter.getDataInicioFilter().isEmpty() && filter.getDataInicioFilter() != null){
+            dataInicio = new SimpleDateFormat("yyyy-MM-dd").parse(filter.getDataInicioFilter());
+        }
+        if(!filter.getDataFimFilter().isEmpty() && filter.getDataFimFilter() != null){
+            dataFim = new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.parse(filter.getDataFimFilter()).plusDays(1).toString());
+        }else{
+            dataFim = new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().plusDays(1).toString());
+        }
+
+        var exames = exameRepository.findByDataBetween(dataInicio,dataFim);
+
+        if(!filter.getAtivoFilter().isEmpty() && filter.getAtivoFilter() != null){
+            var filtro = new ArrayList<Exame>();
+            var ativo = Boolean.parseBoolean(filter.getAtivoFilter());
+            var examesByStatus = exameRepository.findByStatus(ativo);
+
+            for(var exame : exames){
+                for(var exameByStatu : examesByStatus){
+                    if(exame.getId() == exameByStatu.getId()){
+                        filtro.add(exame);
+                    }
+                }
+            }
+
+            exames = filtro;
+        }
+
+        redirectAttributes.addFlashAttribute("exames", exames);
+        redirectAttributes.addFlashAttribute("filtro", filter);
+
+        return "redirect:/exame";
+    }
+
+    @GetMapping("/alterarStatus/{id}")
+    public String alterarStatus(@PathVariable(name = "id") Long id) {
+        var exame = exameRepository.findById(id).get();
+        exame.setStatus(!exame.getStatus());
+        exameRepository.save(exame);
+        return "redirect:/exame/view/" + id;
+    }
+
+    @PreAuthorize("hasAnyAuthority('RADIOLOGISTA')")
     @GetMapping("/view/{id}")
     public String pageExameView(@PathVariable Long id, Model model, HttpServletRequest request){
+
+        model.addAttribute("usuarioLogado", new GetCookie().getCookieUsuario(usuarioRepository,request));
+
+        model.addAttribute("exame", exameRepository.findById(id).get());
+        model.addAttribute("listInterproximais", interproximalRepository.findAll());
+        model.addAttribute("listPeriapicais", periapicalRepository.findAll());
+        model.addAttribute("listTomografias", tomografiaRepository.findAll());
 
         return "exame/form-view-exame";
     }
 
-    private List<Exame> filterPageExame(){
-        return null;
-    }
 
 //    LADO DO DENTISTA
-
     @PreAuthorize("hasAnyAuthority('DENTISTA')")
     @GetMapping("/form")
     public String pageFormExames(Model model, HttpServletRequest request){

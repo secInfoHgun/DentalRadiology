@@ -15,15 +15,15 @@
                     <p class="navbar-brand">Exames</p>
                 </div>
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
-<!--                    <ul class="navbar-nav">-->
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" th:href="@{/dentista/form}">-->
-<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">-->
-<!--                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>-->
-<!--                                </svg>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link btn-magnify" href="#" data-toggle="modal" data-target="#modalFiltroExames">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -37,30 +37,40 @@
                         <div class="job-box d-md-flex align-items-center justify-content-between mb-30" style="width: 900px; height: 120px; background-color: white">
                             <div class="job-left my-4 d-md-flex align-items-center flex-wrap" >
                                 <div class="job-content">
-                                    <h6 class="text-center text-md-left" style="text-transform:none; margin-top: 16px; margin-bottom: 16px" th:text="'Exame N° '+${exame.id}"></h6>
+                                    <h6 class="text-center text-md-left" style="text-transform:none; margin-top: 16px; margin-bottom: 16px" th:text="${exame.paciente.nome}"></h6>
 
                                     <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
-                                        <li class="mr-md-4" >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#6bd098" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                                                <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
-                                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        <li class="mr-md-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#116cdf" class="bi bi-calendar-check" viewBox="0 0 16 16">
+                                                <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
                                             </svg>
-                                            <span th:text="${exame.paciente.nome}" style="text-transform:none;"></span>
+                                            <span th:text="${exame.getDataSolicitacaoFormatter()}"></span>
                                         </li>
-                                        <li th:if="${exame.paciente != null && exame.paciente.cpf != null}" class="mr-md-4" >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#6bd098" class="bi bi-credit-card-2-front" viewBox="0 0 16 16">
+                                        <li class="mr-md-4" >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#116cdf" class="bi bi-bookmark-check" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                            </svg>
+                                            <span th:if="${exame.status == true}" style="text-transform:none;">Ativa</span>
+                                            <span th:if="${exame.status == false}" style="text-transform:none;">Finalizada</span>
+
+                                        </li>
+                                        <li th:if="${exame.paciente != null && exame.paciente.cpf != null && !exame.paciente.cpf.isEmpty()}" class="mr-md-4" >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#116cdf" class="bi bi-credit-card-2-front" viewBox="0 0 16 16">
                                                 <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
                                                 <path d="M2 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
                                             </svg>
                                             <span th:text="${exame.paciente.cpf}" style="text-transform:none;"></span>
                                         </li>
-                                        <li th:if="${exame.paciente != null && exame.paciente.preccp != null}" class="mr-md-4" >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#6bd098" class="bi bi-credit-card-2-front" viewBox="0 0 16 16">
+                                        <li th:if="${exame.paciente != null && exame.paciente.preccp != null && !exame.paciente.preccp.isEmpty()}" class="mr-md-4" >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#116cdf" class="bi bi-credit-card-2-front" viewBox="0 0 16 16">
                                                 <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
                                                 <path d="M2 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
                                             </svg>
                                             <span th:text="${exame.paciente.preccp}" style="text-transform:none;"></span>
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -72,7 +82,7 @@
                                         </svg>
                                     </a>
                                     <a th:href="@{'/exame/view/' + ${exame.id}}" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#ef8157" class="bi bi-eye" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#116cdf" class="bi bi-eye" viewBox="0 0 16 16">
                                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                                         </svg>
@@ -87,53 +97,59 @@
     </div>
 </div>
 
+<div id="modalFiltroExames" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="width: 150%">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal2">Filtro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form method="post" th:action="@{/exame}" th:object="${filtro}">
+
+                        <div class="row" style="margin-bottom: 10px">
+                            <div class="col-md-12 pl-1">
+                                <div class="form-group">
+                                    <label style="color: #2a2b2d">Status</label>
+                                    <select class="form-control" th:field="*{ativoFilter}">
+                                        <option th:value="null"></option>
+                                        <option th:value="true">Ativos</option>
+                                        <option th:value="false">Finalizadas</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 10px">
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label style="color: #2a2b2d">Data de inicio <b style="color: red">*</b></label>
+                                    <input type="date" class="form-control" aria-label="Text input with segmented dropdown button" required th:field="*{dataInicioFilter}">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label style="color: #2a2b2d">Data de fim</label>
+                                    <input type="date" class="form-control" aria-label="Text input with segmented dropdown button" th:field="*{dataFimFilter}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 20px; background-color: #116cdf">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div th:replace="fragments/imports :: imports"></div>
 
-<script th:inline="javascript" type="text/javascript">
-    function excluir(id){
-        const baseurl = window.location.origin;
-
-        Swal.fire({
-            icon: 'question',
-            title: 'Excluir este usuário?',
-            showDenyButton: true,
-            confirmButtonColor: "#ef8157",
-            confirmButtonText: `Excluir`,
-            denyButtonColor: "#919090",
-            denyButtonText: `Cancelar`
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url : baseurl+"/usuario/delete/"+id,
-                    type : 'get',
-
-                    success: function (response){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Usuário excluido!',
-                            text: 'O usuário foi removido do sistema e seu acesso negado',
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then((result) => {
-                            window.location.reload();
-                        })
-                    },
-
-                    error: function (xhr, textStatus, error){
-                        console.log(xhr)
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Ooops...',
-                            text: 'Houve um problema interno e o usuário não pôde ser excluido',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    }
-                })
-            }
-        })
-    }
-</script>
 </body>
 
 </html>

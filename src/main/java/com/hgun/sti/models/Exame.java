@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -24,8 +23,24 @@ import java.util.Set;
 public class Exame extends AbstractEntidade {
 
     private String observacoes;
-
     private Date dataSolicitacao;
+
+    private Boolean radiografiaPanoramica;
+
+    private Boolean teleradiografia;
+
+    private Boolean atm;
+
+    private Boolean status = true;
+
+    @Transient
+    private String dataInicioFilter;
+
+    @Transient
+    private String dataFimFilter;
+
+    @Transient
+    private String ativoFilter;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Pessoa paciente;

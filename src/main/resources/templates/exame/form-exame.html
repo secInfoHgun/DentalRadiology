@@ -38,14 +38,13 @@
         <div class="card-body" style="padding: 40px">
             <form method="post" th:action="@{/exame/salvar}" th:object="${exame}">
 
-                <div class="row">
+                <div class="row" style="margin-top: 25px">
                     <div class="col-md-12 pl-1">
-                        <h6 style="color: #2a2b2d">Dados do Dentista</h6>
+                        <h6 style="color: #2a2b2d; font-size: 17px">Dados do Dentista</h6>
                     </div>
                 </div>
 
                 <input type="hidden" class="form-control" th:field="*{dentista.id}">
-
 
                 <div class="row">
                     <div class="col-md-6 pl-1">
@@ -83,9 +82,9 @@
                     </div>
                 </div>
 
-                <div class="row" style="margin-top: 20px">
+                <div class="row" style="margin-top: 25px">
                     <div class="col-md-12 pl-1">
-                        <h6 style="color: #2a2b2d">Dados do Paciente</h6>
+                        <h6 style="color: #2a2b2d; font-size: 17px">Dados do Paciente</h6>
                     </div>
                 </div>
 
@@ -98,14 +97,21 @@
                     </div>
                     <div class="col-md-4 pl-1">
                         <div class="form-group">
-                            <label style="color: #2a2b2d">CPF</label>
-                            <input type="text" class="form-control" data-mask="000.000.000-00" th:field="*{paciente.cpf}">
+                            <label style="color: #2a2b2d">E-mail</label>
+                            <input type="email" class="form-control" th:field="*{paciente.email}">
                         </div>
+
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-8 pl-1">
+                    <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">CPF</label>
+                            <input type="text" class="form-control" data-mask="000.000.000-00" th:field="*{paciente.cpf}">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
                         <div class="form-group">
                             <label style="color: #2a2b2d">PRECCP</label>
                             <input class="form-control" type="text" th:field="*{paciente.preccp}">
@@ -129,29 +135,21 @@
                     </div>
                 </div>
 
-                <div class="row" style="margin-top: 20px">
+                <div class="row" style="margin-top: 25px">
                     <div class="col-md-12 pl-1">
-                        <h6 style="color: #2a2b2d">Dados do Exame</h6>
+                        <h6 style="color: #2a2b2d; font-size: 17px">Dados do Exame</h6>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12 pl-1">
                         <div class="form-group">
-                            <label style="color: #2a2b2d">Data</label>
+                            <label style="color: #2a2b2d">Data da solicitação</label>
                             <input type="text" th:value="${exame.getDataSolicitacaoFormatter()}" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 pl-1" th:each="inter : ${listInterproximais}">
-                        <label style="color: #2a2b2d" th:if="${inter.id == 1}"><strong>Interproximal</strong></label>
-                        <div th:style="${inter.id == 1 ? 'margin-top: 10px; margin-left: 60px' : 'margin-top: 37px; margin-left: 60px'}">
-                            <input class="form-check-input" type="checkbox" th:field="*{interproximais}" th:value="${inter.id}" style="width: 20px; height: 20px">
-                            <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d" th:text="${inter.nome}"></label>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col-md-12 pl-1">
                         <div class="form-group">
@@ -539,6 +537,8 @@
                         </div>
                     </div>
                 </div>
+
+                <br/>
 
                 <div class="row">
                     <div class="col-md-12 pl-1">
@@ -928,6 +928,35 @@
                     </div>
                 </div>
 
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-6 pl-1">
+                        <label style="color: #2a2b2d"><strong>Interproximal</strong></label>
+                        <div style="margin-left: 40px; margin-bottom: 6px" th:each="inter : ${listInterproximais}">
+                            <input class="form-check-input" type="checkbox" th:field="*{interproximais}" th:value="${inter.id}" style="width: 25px; height: 25px">
+                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d" th:text="${inter.nome}"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                        <label style="color: #2a2b2d"><strong>Outros</strong></label>
+                        <div style="margin-left: 40px; margin-bottom: 6px">
+                            <input class="form-check-input" type="checkbox" th:field="*{radiografiaPanoramica}" th:checked="${radiografiaPanoramica}" style="width: 25px; height: 25px">
+                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d">Radiografia panorâmica</label>
+                        </div>
+                        <div style="margin-left: 40px; margin-bottom: 6px">
+                            <input class="form-check-input" type="checkbox" th:field="*{teleradiografia}" th:checked="${teleradiografia}" style="width: 25px; height: 25px">
+                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d">Teleradiografia</label>
+                        </div>
+                        <div style="margin-left: 40px; margin-bottom: 6px">
+                            <input class="form-check-input" type="checkbox" th:field="*{atm}" th:checked="${atm}" style="width: 25px; height: 25px">
+                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d">ATM</label>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
                 <div class="row">
                     <div class="col-md-12 pl-1">
                         <div class="form-group">
@@ -940,7 +969,7 @@
 
                 <div class="row">
                     <div class="ml-auto mr-auto">
-                        <button type="submit" class="btn btn-success mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Enviar</button>
+                        <button type="submit" class="btn btn-primary mx-auto" style="width: 200px; height: 40px; font-size: 14px; background-color: #116cdf" >Enviar</button>
                     </div>
                 </div>
             </form>

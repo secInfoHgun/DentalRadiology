@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <li th:fragment="li(ativo, link, classI, nome)" th:attr="class=${ativo ? 'active' : ''}">
-    <a th:href="@{${link}}" th:style="${ativo ? 'color: #6bd098' : ''}">
-        <i th:attr="class=${classI}" th:style="${ativo ? 'color: #6bd098' : ''}"></i>
+    <a th:href="@{${link}}" th:style="${ativo ? 'color: #116cdf' : ''}">
+        <i th:attr="class=${classI}" th:style="${ativo ? 'color: #116cdf' : ''}"></i>
         <p th:text="${nome}"></p>
     </a>
 </li>
