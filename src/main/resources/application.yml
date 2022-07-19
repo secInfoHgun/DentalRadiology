@@ -11,7 +11,7 @@ spring:
       ddl-auto: update
 
 server:
-  port: 8080
+  port: 8083
 # port: "VERIFICAR AS PORTAS NAO UTILIZADAS E FAZER UTILIZAR UMA SEM ALOCACAO"
   tomcat:
     relaxed-query-chars: '|,{,},[,]'
