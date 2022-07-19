@@ -2,16 +2,10 @@ package com.hgun.sti.components;
 
 import com.hgun.sti.models.Role;
 import com.hgun.sti.models.Usuario;
-import com.hgun.sti.models.tipos.Dente;
-import com.hgun.sti.models.tipos.Interproximal;
-import com.hgun.sti.models.tipos.Periapical;
-import com.hgun.sti.models.tipos.Tomografia;
+import com.hgun.sti.models.tipos.*;
 import com.hgun.sti.repository.RoleRepository;
 import com.hgun.sti.repository.UsuarioRepository;
-import com.hgun.sti.repository.tipos.DenteRepository;
-import com.hgun.sti.repository.tipos.InterproximalRepository;
-import com.hgun.sti.repository.tipos.PeriapicalRepository;
-import com.hgun.sti.repository.tipos.TomografiaRepository;
+import com.hgun.sti.repository.tipos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -40,6 +34,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     private DenteRepository denteRepository;
 
+    @Autowired
+    private AtmRepository atmRepository;
+
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
 
@@ -47,6 +44,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         var listPeriapical = periapicalRepository.findAll();
         var listTomografia = tomografiaRepository.findAll();
         var listDente = denteRepository.findAll();
+        var listAtm = atmRepository.findAll();
 
         var roles = roleRepository.findAll();
 
@@ -102,6 +100,19 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             usuarioRepository.save(newUsuario);
 
             System.out.println("cadastrei o usuario de odontoradio");
+        }
+
+        if(listAtm.isEmpty()){
+
+            String[] nomes = { "Direita" , "Esquerda" };
+
+            for (String i: nomes) {
+                var atm =  new Atm();
+                atm.setNome(i);
+                atmRepository.save(atm);
+            }
+
+            System.out.println("cadastrei os tipos de atm");
         }
 
         if(listInterproximal.isEmpty()){

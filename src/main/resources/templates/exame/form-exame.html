@@ -939,18 +939,27 @@
                         </div>
                     </div>
                     <div class="col-md-6 pl-1">
-                        <label style="color: #2a2b2d"><strong>Outros</strong></label>
-                        <div style="margin-left: 40px; margin-bottom: 6px">
-                            <input class="form-check-input" type="checkbox" th:field="*{radiografiaPanoramica}" th:checked="${radiografiaPanoramica}" style="width: 25px; height: 25px">
-                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d">Radiografia panorâmica</label>
+                        <label style="color: #2a2b2d"><strong>ATM</strong></label>
+                        <div style="margin-left: 40px; margin-bottom: 6px" th:each="a : ${listatms}">
+                            <input class="form-check-input" type="checkbox" th:field="*{atms}" th:value="${a.id}" style="width: 25px; height: 25px">
+                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d" th:text="${a.nome}"></label>
                         </div>
-                        <div style="margin-left: 40px; margin-bottom: 6px">
-                            <input class="form-check-input" type="checkbox" th:field="*{teleradiografia}" th:checked="${teleradiografia}" style="width: 25px; height: 25px">
-                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d">Teleradiografia</label>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-6 pl-1">
+                        <div style="margin-bottom: 6px">
+                            <label class="form-check-label" style="margin-top: 8px; color: #2a2b2d"><strong>Radiografia panorâmica</strong></label>
+                            <input class="form-check-input" type="checkbox" th:field="*{radiografiaPanoramica}" th:checked="${radiografiaPanoramica}" style="margin-left: 20px; width: 25px; height: 25px">
                         </div>
-                        <div style="margin-left: 40px; margin-bottom: 6px">
-                            <input class="form-check-input" type="checkbox" th:field="*{atm}" th:checked="${atm}" style="width: 25px; height: 25px">
-                            <label class="form-check-label" style="margin-left: 20px; margin-top: 8px; color: #2a2b2d">ATM</label>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                        <div style="margin-bottom: 6px">
+                            <label class="form-check-label" style="margin-top: 8px; color: #2a2b2d"><strong>Teleradiografia</strong></label>
+                            <input class="form-check-input" type="checkbox" th:field="*{teleradiografia}" th:checked="${teleradiografia}" style="margin-left: 20px; width: 25px; height: 25px">
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import com.hgun.sti.components.GetCookie;
 import com.hgun.sti.models.Exame;
 import com.hgun.sti.repository.ExameRepository;
 import com.hgun.sti.repository.UsuarioRepository;
+import com.hgun.sti.repository.tipos.AtmRepository;
 import com.hgun.sti.repository.tipos.InterproximalRepository;
 import com.hgun.sti.repository.tipos.PeriapicalRepository;
 import com.hgun.sti.repository.tipos.TomografiaRepository;
@@ -40,6 +41,9 @@ public class ExameController {
 
     @Autowired
     private TomografiaRepository tomografiaRepository;
+
+    @Autowired
+    private AtmRepository atmRepository;
 
 //    LADO DO RADIOLOGISTA
     @PreAuthorize("hasAnyAuthority('RADIOLOGISTA')")
@@ -116,6 +120,7 @@ public class ExameController {
         model.addAttribute("listInterproximais", interproximalRepository.findAll());
         model.addAttribute("listPeriapicais", periapicalRepository.findAll());
         model.addAttribute("listTomografias", tomografiaRepository.findAll());
+        model.addAttribute("listatms", atmRepository.findAll());
 
         return "exame/form-view-exame";
     }
@@ -134,6 +139,7 @@ public class ExameController {
         model.addAttribute("listInterproximais", interproximalRepository.findAll());
         model.addAttribute("listPeriapicais", periapicalRepository.findAll());
         model.addAttribute("listTomografias", tomografiaRepository.findAll());
+        model.addAttribute("listatms", atmRepository.findAll());
 
         return "exame/form-exame";
     }

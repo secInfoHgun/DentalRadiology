@@ -1,10 +1,7 @@
 package com.hgun.sti.models;
 
 import com.hgun.sti.models.abstracts.AbstractEntidade;
-import com.hgun.sti.models.tipos.Dente;
-import com.hgun.sti.models.tipos.Interproximal;
-import com.hgun.sti.models.tipos.Periapical;
-import com.hgun.sti.models.tipos.Tomografia;
+import com.hgun.sti.models.tipos.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,8 +26,6 @@ public class Exame extends AbstractEntidade {
 
     private Boolean teleradiografia;
 
-    private Boolean atm;
-
     private Boolean status = true;
 
     @Transient
@@ -53,6 +48,14 @@ public class Exame extends AbstractEntidade {
 
     @OneToOne
     private Tomografia tomografia;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "exames_atm",
+            joinColumns = @JoinColumn(name = "exame_id"),
+            inverseJoinColumns = @JoinColumn(name = "atm_id")
+    )
+    private Set<Atm> atms = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
