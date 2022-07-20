@@ -54,7 +54,7 @@ public class UsuarioController {
     public String pageListFilterUsuarios(@ModelAttribute Usuario filterUsuario, RedirectAttributes redirectAttributes){
 
         if(filterUsuario.getInputFilter() != null && !filterUsuario.getInputFilter().isEmpty() && !filterUsuario.getInputFilter().equals("")) {
-            redirectAttributes.addFlashAttribute("usuarios", usuarioRepository.findAll());
+            redirectAttributes.addFlashAttribute("usuarios", usuarioRepository.getUsuarioByFilter(filterUsuario.getInputFilter()));
         }
 
         redirectAttributes.addFlashAttribute("filterUsuario", filterUsuario);

@@ -57,6 +57,7 @@
                         <div class="form-group">
                             <label style="color: #2a2b2d">Posto / Graduação </label>
                             <select class="form-control" disabled th:field="*{dentista.postoGraduacao}">
+                                <option th:value="SC">Servidor Civil</option>
                                 <option th:value="SD_EV">Soldado EV</option>
                                 <option th:value="SD_NB">Soldado NB</option>
                                 <option th:value="CB">Cabo</option>
@@ -89,19 +90,13 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-8 pl-1">
+                    <div class="col-md-12 pl-1">
                         <div class="form-group">
                             <label style="color: #2a2b2d">Nome completo <b style="color: red">*</b></label>
                             <input type="text" class="form-control" required th:field="*{paciente.nome}">
                         </div>
                     </div>
-                    <div class="col-md-4 pl-1">
-                        <div class="form-group">
-                            <label style="color: #2a2b2d">E-mail</label>
-                            <input type="email" class="form-control" th:field="*{paciente.email}">
-                        </div>
 
-                    </div>
                 </div>
 
                 <div class="row">
@@ -117,6 +112,7 @@
                             <input class="form-control" type="text" th:field="*{paciente.preccp}">
                         </div>
                     </div>
+
                     <div class="col-md-2 pl-1">
                         <div class="form-group">
                             <label style="color: #2a2b2d">Idade <b style="color: red">*</b></label>
@@ -131,6 +127,21 @@
                                 <option th:value="M">Masculino</option>
                                 <option th:value="F">Feminino</option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 pl-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">E-mail</label>
+                            <input type="email" class="form-control" th:field="*{paciente.email}">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                            <label style="color: #2a2b2d">Telefone <small>(com o DDD)</small></label>
+                            <input type="text" class="form-control" data-mask="(00) 000000000" th:field="*{paciente.telefone}">
                         </div>
                     </div>
                 </div>

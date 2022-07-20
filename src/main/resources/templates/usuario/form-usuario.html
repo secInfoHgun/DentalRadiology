@@ -96,6 +96,7 @@
                                                 <label style="color: #2a2b2d">Posto / Graduação <b style="color: red">*</b></label>
                                                 <select th:class="${ erros.postoGraduacao != null ? 'form-control is-invalid' : 'form-control'}" required th:field="*{postoGraduacao}">
                                                     <option th:value="null"></option>
+                                                    <option th:value="SC">Servidor Civil</option>
                                                     <option th:value="SD_EV">Soldado EV</option>
                                                     <option th:value="SD_NB">Soldado NB</option>
                                                     <option th:value="CB">Cabo</option>

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    @Query("SELECT u FROM Usuario u WHERE u.ativo = true and u.id <> 1 and u.id <> 2")
+    @Query("SELECT u FROM Usuario u WHERE u.ativo = true and u.id <> 1 and u.id <> 2 order by u.pessoa.nome")
     List<Usuario> findAllAtivo();
 
     @Query("SELECT u FROM Usuario u WHERE u.login = :login")
@@ -22,4 +22,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             "where (ur.role_id = (select r2.role_id from roles r2 where r2.name like '%USER%') or u.id = :idUsuarioLogado) " +
             "and u.ativo = true", nativeQuery = true)
     List<Usuario> findAllUsers(Long idUsuarioLogado);
+
+    @Query("SELECT u FROM Usuario u WHERE u.ativo = true and (u.pessoa.nome =:filter or u.login =:filter or u.pessoa.cpf =:filter)")
+    List<Usuario> getUsuarioByFilter(@Param("filter") String filter);
 }

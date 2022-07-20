@@ -78,6 +78,27 @@
                                                     </svg>
                                                     <span th:text="${usuario.pessoa.cpf}" style="text-transform:none;"></span>
                                                 </li>
+                                                <li class="mr-md-4" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#116cdf" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+                                                        <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
+                                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                                    </svg>
+                                                    <span th:if="${usuario.postoGraduacao == 'SC'}" style="text-transform:none;">Servidor Civil</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'SD_EV'}" style="text-transform:none;">Soldado EV</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'SD_NB'}" style="text-transform:none;">Soldado NB</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'CB'}" style="text-transform:none;">Cabo</span>
+                                                    <span th:if="${usuario.postoGraduacao == '3SGT'}" style="text-transform:none;">3° Sargento</span>
+                                                    <span th:if="${usuario.postoGraduacao == '2SGT'}" style="text-transform:none;">2° Sargento</span>
+                                                    <span th:if="${usuario.postoGraduacao == '1SGT'}" style="text-transform:none;">1° Sargento</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'SUB'}" style="text-transform:none;">Subtenente</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'ASP'}" style="text-transform:none;">Aspirante a Oficial</span>
+                                                    <span th:if="${usuario.postoGraduacao == '2TEN'}" style="text-transform:none;">2° Tenente</span>
+                                                    <span th:if="${usuario.postoGraduacao == '1TEN'}" style="text-transform:none;">1° Tenente</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'CAP'}" style="text-transform:none;">Capitão</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'MAJ'}" style="text-transform:none;">Major</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'T_CEL'}" style="text-transform:none;">Tenente-Coronel</span>
+                                                    <span th:if="${usuario.postoGraduacao == 'CEL'}" style="text-transform:none;">Coronel</span>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -119,14 +140,14 @@
                     icon: 'question',
                     title: 'Excluir este usuário?',
                     showDenyButton: true,
-                    confirmButtonColor: "#ef8157",
+                    confirmButtonColor: "#116cdf",
                     confirmButtonText: `Excluir`,
                     denyButtonColor: "#919090",
                     denyButtonText: `Cancelar`
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : baseurl+"/usuario/delete/"+id,
+                            url : baseurl+"/dentista/delete/"+id,
                             type : 'get',
 
                             success: function (response){

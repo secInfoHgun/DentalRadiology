@@ -20,4 +20,5 @@ public class Pessoa extends AbstractEntidade {
     private Character sexo;
     private String preccp;
     private String email;
+    private String telefone;
 }
